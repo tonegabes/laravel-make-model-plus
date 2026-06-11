@@ -28,7 +28,7 @@ php artisan vendor:publish --tag=laravel-make-model-plus-stubs
 ## Usage
 
 ```bash
-php artisan make:mpac-model Evento --resource=eventos
+php artisan make:model-plus Evento --resource=eventos
 ```
 
 ### Available options
