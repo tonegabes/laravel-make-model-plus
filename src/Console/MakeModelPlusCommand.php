@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tonegabes\FilamentMakeModel\Console;
+namespace Tonegabes\LaravelMakeModelPlus\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
-class MakeMpacModelCommand extends Command
+class MakeModelPlusCommand extends Command
 {
-    protected $signature = 'make:mpac-model
+    protected $signature = 'make:model-plus
                             {name : Nome do model, ex: Evento}
                             {--resource= : Base das permissions, ex: eventos}
                             {--panel= : ID do painel Filament, ex: admin}
@@ -18,7 +18,8 @@ class MakeMpacModelCommand extends Command
                             {--migration : Criar migration}
                             {--factory : Criar factory}
                             {--seed : Criar seeder}
-                            {--force : Sobrescrever arquivos existentes}';
+                            {--force : Sobrescrever arquivos existentes}'
+    ;
 
     protected $description = 'Cria um model com enum de permissions, policy, testes e Filament Resource com view page';
 
@@ -140,7 +141,7 @@ class MakeMpacModelCommand extends Command
             return $panelOption;
         }
 
-        return (string) config('filament-make-model.filament.panel', 'admin');
+        return (string) config('laravel-make-model-plus.filament.panel', 'admin');
     }
 
     /**
@@ -148,7 +149,7 @@ class MakeMpacModelCommand extends Command
      */
     private function resolveRecordTitleAttribute(): string
     {
-        return (string) config('filament-make-model.filament.record_title_attribute', 'id');
+        return (string) config('laravel-make-model-plus.filament.record_title_attribute', 'id');
     }
 
     /**
@@ -162,7 +163,7 @@ class MakeMpacModelCommand extends Command
         $permissionModelClass = class_basename($permissionModelFqcn);
         $userModelFqcn = $this->resolveUserModelFqcn();
         $userModelClass = class_basename($userModelFqcn);
-        $appNamespace = trim((string) config('filament-make-model.app_namespace', 'App'), '\\');
+        $appNamespace = trim((string) config('laravel-make-model-plus.app_namespace', 'App'), '\\');
 
         return [
             '{{ AppNamespace }}' => $appNamespace,
@@ -183,7 +184,7 @@ class MakeMpacModelCommand extends Command
      */
     private function resolveUserModelFqcn(): string
     {
-        return ltrim((string) config('filament-make-model.models.user', 'App\\Models\\User'), '\\');
+        return ltrim((string) config('laravel-make-model-plus.models.user', 'App\\Models\\User'), '\\');
     }
 
     /**
@@ -191,7 +192,7 @@ class MakeMpacModelCommand extends Command
      */
     private function resolvePermissionModelFqcn(): string
     {
-        $model = config('filament-make-model.models.permission');
+        $model = config('laravel-make-model-plus.models.permission');
 
         if (is_string($model) && $model !== '') {
             return ltrim($model, '\\');
@@ -268,7 +269,7 @@ class MakeMpacModelCommand extends Command
      */
     private function resolveConfiguredPath(string $configKey, string $fileName): string
     {
-        $relativePath = trim((string) config("filament-make-model.{$configKey}"), '\\/');
+        $relativePath = trim((string) config("laravel-make-model-plus.{$configKey}"), '\\/');
 
         return base_path($relativePath . DIRECTORY_SEPARATOR . $fileName);
     }
@@ -278,7 +279,7 @@ class MakeMpacModelCommand extends Command
      */
     private function resolveStubPath(string $stubPath): string
     {
-        $configuredStubPath = config('filament-make-model.stubs.path');
+        $configuredStubPath = config('laravel-make-model-plus.stubs.path');
 
         if (is_string($configuredStubPath) && $configuredStubPath !== '') {
             return rtrim($configuredStubPath, '\\/') . DIRECTORY_SEPARATOR . $stubPath;

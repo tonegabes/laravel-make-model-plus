@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tonegabes\FilamentMakeModel\Tests;
+namespace Tonegabes\LaravelMakeModelPlus\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Tonegabes\FilamentMakeModel\FilamentMakeModelServiceProvider;
+use Tonegabes\LaravelMakeModelPlus\LaravelMakeModelPlusServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -18,7 +18,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            FilamentMakeModelServiceProvider::class,
+            LaravelMakeModelPlusServiceProvider::class,
         ];
     }
 }
