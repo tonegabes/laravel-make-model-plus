@@ -1,0 +1,108 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ AppNamespace }}\Policies;
+
+use {{ AppNamespace }}\Enums\Permissions\{{ PermissionEnumClass }};
+use {{ AppNamespace }}\Models\{{ ModelClass }};
+use {{ UserModelFqcn }};
+
+class {{ ModelClass }}Policy
+{
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::ViewAny);
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view({{ UserModel }} $user, {{ ModelClass }} ${{ modelVariable }}): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::View);
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Create);
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update({{ UserModel }} $user, {{ ModelClass }} ${{ modelVariable }}): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Update);
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete({{ UserModel }} $user, {{ ModelClass }} ${{ modelVariable }}): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Delete);
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore({{ UserModel }} $user, {{ ModelClass }} ${{ modelVariable }}): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Restore);
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete({{ UserModel }} $user, {{ ModelClass }} ${{ modelVariable }}): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::ForceDelete);
+    }
+
+    /**
+     * Determine whether the user can delete any models.
+     */
+    public function deleteAny({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Delete);
+    }
+
+    /**
+     * Determine whether the user can restore any models.
+     */
+    public function restoreAny({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Restore);
+    }
+
+    /**
+     * Determine whether the user can permanently delete any models.
+     */
+    public function forceDeleteAny({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::ForceDelete);
+    }
+
+    /**
+     * Determine whether the user can replicate models.
+     */
+    public function replicate({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Replicate);
+    }
+
+    /**
+     * Determine whether the user can reorder models.
+     */
+    public function reorder({{ UserModel }} $user): bool
+    {
+        return $user->can({{ PermissionEnumClass }}::Reorder);
+    }
+}
