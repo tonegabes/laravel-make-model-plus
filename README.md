@@ -1,10 +1,10 @@
 # Filament Make Model
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/tonegabes/filament-make-model.svg?style=flat-square)](https://packagist.org/packages/tonegabes/filament-make-model)
-[![Total Downloads](https://img.shields.io/packagist/dt/tonegabes/filament-make-model.svg?style=flat-square)](https://packagist.org/packages/tonegabes/filament-make-model)
-[![License](https://img.shields.io/packagist/l/tonegabes/filament-make-model.svg?style=flat-square)](https://packagist.org/packages/tonegabes/filament-make-model)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tonegabes/laravel-make-model-plus.svg?style=flat-square)](https://packagist.org/packages/tonegabes/laravel-make-model-plus)
+[![Total Downloads](https://img.shields.io/packagist/dt/tonegabes/laravel-make-model-plus.svg?style=flat-square)](https://packagist.org/packages/tonegabes/laravel-make-model-plus)
+[![License](https://img.shields.io/packagist/l/tonegabes/laravel-make-model-plus.svg?style=flat-square)](https://packagist.org/packages/tonegabes/laravel-make-model-plus)
 
-`tonegabes/filament-make-model` extracts the MPAC scaffolding command to a reusable package.
+`tonegabes/laravel-make-model-plus` implement additional features envolving Filament resources and permissions enums.
 
 ## Requirements
 
@@ -15,14 +15,14 @@
 ## Installation
 
 ```bash
-composer require tonegabes/filament-make-model
+composer require tonegabes/laravel-make-model-plus
 ```
 
 Optional: publish config and stubs.
 
 ```bash
-php artisan vendor:publish --tag=filament-make-model-config
-php artisan vendor:publish --tag=filament-make-model-stubs
+php artisan vendor:publish --tag=laravel-make-model-plus-config
+php artisan vendor:publish --tag=laravel-make-model-plus-stubs
 ```
 
 ## Usage

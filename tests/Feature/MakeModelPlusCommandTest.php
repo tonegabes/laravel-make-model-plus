@@ -5,22 +5,22 @@ declare(strict_types=1);
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tonegabes\FilamentMakeModel\Console\MakeMpacModelCommand;
+use Tonegabes\LaravelMakeModelPlus\Console\MakeModelPlusCommand;
 
 it('creates enum, policy and tests from stubs and forwards command options', function (): void {
-    $tempBasePath = base_path('tmp/filament-make-model');
+    $tempBasePath = base_path('tmp/laravel-make-model-plus');
     $files = new Filesystem;
 
     $files->deleteDirectory($tempBasePath);
 
-    config()->set('filament-make-model.paths.enums', 'tmp/filament-make-model/app/Enums/Permissions');
-    config()->set('filament-make-model.paths.policies', 'tmp/filament-make-model/app/Policies');
-    config()->set('filament-make-model.paths.tests.unit_enums', 'tmp/filament-make-model/tests/Unit/Enums/Permissions');
-    config()->set('filament-make-model.paths.tests.feature_policies', 'tmp/filament-make-model/tests/Feature/Policies');
-    config()->set('filament-make-model.filament.panel', 'admin');
-    config()->set('filament-make-model.filament.record_title_attribute', 'id');
+    config()->set('laravel-make-model-plus.paths.enums', 'tmp/laravel-make-model-plus/app/Enums/Permissions');
+    config()->set('laravel-make-model-plus.paths.policies', 'tmp/laravel-make-model-plus/app/Policies');
+    config()->set('laravel-make-model-plus.paths.tests.unit_enums', 'tmp/laravel-make-model-plus/tests/Unit/Enums/Permissions');
+    config()->set('laravel-make-model-plus.paths.tests.feature_policies', 'tmp/laravel-make-model-plus/tests/Feature/Policies');
+    config()->set('laravel-make-model-plus.filament.panel', 'admin');
+    config()->set('laravel-make-model-plus.filament.record_title_attribute', 'id');
 
-    $command = new class ($files) extends MakeMpacModelCommand
+    $command = new class ($files) extends MakeModelPlusCommand
     {
         /**
          * @var array<string, array<string, mixed>>
@@ -74,10 +74,10 @@ it('creates enum, policy and tests from stubs and forwards command options', fun
             '--force' => true,
         ]);
 
-    $enumPath = base_path('tmp/filament-make-model/app/Enums/Permissions/EventoPermissions.php');
-    $policyPath = base_path('tmp/filament-make-model/app/Policies/EventoPolicy.php');
-    $enumTestPath = base_path('tmp/filament-make-model/tests/Unit/Enums/Permissions/EventoPermissionsTest.php');
-    $policyTestPath = base_path('tmp/filament-make-model/tests/Feature/Policies/EventoPolicyTest.php');
+    $enumPath = base_path('tmp/laravel-make-model-plus/app/Enums/Permissions/EventoPermissions.php');
+    $policyPath = base_path('tmp/laravel-make-model-plus/app/Policies/EventoPolicy.php');
+    $enumTestPath = base_path('tmp/laravel-make-model-plus/tests/Unit/Enums/Permissions/EventoPermissionsTest.php');
+    $policyTestPath = base_path('tmp/laravel-make-model-plus/tests/Feature/Policies/EventoPolicyTest.php');
 
     expect($files->exists($enumPath))->toBeTrue()
         ->and($files->exists($policyPath))->toBeTrue()
@@ -89,17 +89,17 @@ it('creates enum, policy and tests from stubs and forwards command options', fun
 });
 
 it('skips filament resource generation when --no-filament is enabled', function (): void {
-    $tempBasePath = base_path('tmp/filament-make-model-no-filament');
+    $tempBasePath = base_path('tmp/laravel-make-model-plus-no-filament');
     $files = new Filesystem;
 
     $files->deleteDirectory($tempBasePath);
 
-    config()->set('filament-make-model.paths.enums', 'tmp/filament-make-model-no-filament/app/Enums/Permissions');
-    config()->set('filament-make-model.paths.policies', 'tmp/filament-make-model-no-filament/app/Policies');
-    config()->set('filament-make-model.paths.tests.unit_enums', 'tmp/filament-make-model-no-filament/tests/Unit/Enums/Permissions');
-    config()->set('filament-make-model.paths.tests.feature_policies', 'tmp/filament-make-model-no-filament/tests/Feature/Policies');
+    config()->set('laravel-make-model-plus.paths.enums', 'tmp/laravel-make-model-plus-no-filament/app/Enums/Permissions');
+    config()->set('laravel-make-model-plus.paths.policies', 'tmp/laravel-make-model-plus-no-filament/app/Policies');
+    config()->set('laravel-make-model-plus.paths.tests.unit_enums', 'tmp/laravel-make-model-plus-no-filament/tests/Unit/Enums/Permissions');
+    config()->set('laravel-make-model-plus.paths.tests.feature_policies', 'tmp/laravel-make-model-plus-no-filament/tests/Feature/Policies');
 
-    $command = new class ($files) extends MakeMpacModelCommand
+    $command = new class ($files) extends MakeModelPlusCommand
     {
         /**
          * @var array<string, array<string, mixed>>
@@ -135,8 +135,8 @@ it('skips filament resource generation when --no-filament is enabled', function 
         ->and($command->callHistory)->toHaveKey('make:model')
         ->and($command->callHistory)->not->toHaveKey('make:filament-resource');
 
-    $enumPath = base_path('tmp/filament-make-model-no-filament/app/Enums/Permissions/LotePermissions.php');
-    $policyPath = base_path('tmp/filament-make-model-no-filament/app/Policies/LotePolicy.php');
+    $enumPath = base_path('tmp/laravel-make-model-plus-no-filament/app/Enums/Permissions/LotePermissions.php');
+    $policyPath = base_path('tmp/laravel-make-model-plus-no-filament/app/Policies/LotePolicy.php');
 
     expect($files->exists($enumPath))->toBeTrue()
         ->and($files->exists($policyPath))->toBeTrue();
